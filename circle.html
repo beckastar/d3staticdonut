@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.arc path {
+  stroke: #fff;
+}
+.inside{
+  background-color: white;
+  font-family: Helvetica;
+}
+.label{
+	color: grey;
+	font-size: 18px;
+	position: absolute;
+	left: 374px;
+	top: 378px; 
+}
+.number{
+	color:black;
+	font-size: 35px;
+	position: absolute;
+	left: 357px;
+	top: 405px;
+}
+</style>
+
+<body>
+<div class="chart"><text class = "label">PASSIVE</text><text class="number">23,409</text></div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+//
+
+
+
+var arc = d3.svg.arc()
+	.innerRadius(115)
+	.outerRadius(160)
+
+var pieLayout = d3.layout.pie()
+	.sort(null)//d3 sort guarantees you order is same as supplied data 
+
+
+var colors = ["#E6E3E4", "#FA4A14"]
+
+var newChart   = d3.select(".chart").append("svg")
+		 			.attr("width", 800)
+		 			.attr("height", 800)
+		 			.append("g")//don't draw onto svg without groups!
+		 			.attr('transform', 'translate(' + 400 + ', ' + 400 + ')')
+
+
+
+
+var data_ = [25, 75]
+
+
+
+
+//binds nonexistant arc to data_ array 
+newChart.selectAll('.arc').data(pieLayout(data_)).enter().append('g')
+			.attr("class", 'arc')
+			.append("path")
+			.attr("d", arc)
+			//for each of these elements fill with a color of the same index
+			.attr("fill", function(d, i){
+				return colors[i]
+			})
+
+//bind data to colors. 
+
+
+			 // move something from nonexistant to existant
+			//in d3 you can bind data with element that doesn't exist 
+			// puts element into group of nonexistant group 
+			// path has single attribute d - dictates how the path looks
+			//need to tell d that it looks like an arc
+			//d3.layout
+
+
+
+//make class arc
+
+
+
+</script>
+
+</body>
+</html>
